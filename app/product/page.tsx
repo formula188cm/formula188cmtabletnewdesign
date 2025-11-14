@@ -6,6 +6,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { ProductCarousel } from "@/components/product-carousel"
 import { WhatsAppButton } from "@/components/whatsapp-button"
+import { Star, StarHalf } from "lucide-react"
 
 export default function ProductPage() {
   const [quantity, setQuantity] = useState(1)
@@ -15,6 +16,80 @@ export default function ProductPage() {
     if (value >= 1 && value <= MAX_QUANTITY) {
       setQuantity(value)
     }
+  }
+
+  const reviewBase = [
+    {
+      name: "Himanshu",
+      text: "This is really incredible, I followed the methods for 5-6 months and gained height from 5'5 to 5'9. All I did was follow consistently.",
+    },
+    {
+      name: "Rohit",
+      text: "Using it for 3 months. I grew from 5'3 to 5'5. Just stay consistent and you will see results too.",
+    },
+    {
+      name: "Arjun",
+      text: "This really works! I was stuck at 5'4 for years, and in 4 months I reached 5'7. Just need patience and discipline.",
+    },
+    {
+      name: "Sahil",
+      text: "I didn’t believe at first, but after 3 months I can see clear results. Went from 5'6 to 5'8.",
+    },
+    {
+      name: "Ritika",
+      text: "Tried everything before, nothing worked. This actually did. From 5'2 to 5'5 in 5 months!",
+    },
+    {
+      name: "Aman",
+      text: "Bro trust me, it’s real. I started at 5'7 and now I’m 5'10 after 6 months.",
+    },
+    {
+      name: "Karan",
+      text: "I used it regularly and saw changes slowly. From 5'5 to 5'8 in around 5 months.",
+    },
+    {
+      name: "Harsh",
+      text: "At first, I thought it’s fake, but consistency made the difference. Grew 2 inches in 3 months.",
+    },
+    {
+      name: "Priya",
+      text: "Never expected it to work this well. 5'3 → 5'6 in just 4 months.",
+    },
+    {
+      name: "Tanish",
+      text: "I followed the plan daily, no excuses. From 5'6 to 5'9 now. Totally worth it!",
+    },
+  ]
+  const surnameOptions = ["Sharma", "Patel", "Gupta", "Verma", "Iyer", "Chopra", "Nair", "Reddy", "Singh", "Bhatt"]
+  const ratingOptions = [4, 4.5, 5]
+  const [reviews] = useState(() =>
+    reviewBase.map((review) => {
+      const surname = surnameOptions[Math.floor(Math.random() * surnameOptions.length)]
+      const rating = ratingOptions[Math.floor(Math.random() * ratingOptions.length)]
+      return {
+        ...review,
+        name: `${review.name} ${surname}`,
+        rating,
+      }
+    }),
+  )
+
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating)
+    const hasHalfStar = rating % 1 !== 0
+    const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0)
+
+    return (
+      <div className="flex items-center gap-1">
+        {[...Array(fullStars)].map((_, i) => (
+          <Star key={`full-${i}`} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+        ))}
+        {hasHalfStar && <StarHalf className="w-4 h-4 fill-yellow-400 text-yellow-400" />}
+        {[...Array(emptyStars)].map((_, i) => (
+          <Star key={`empty-${i}`} className="w-4 h-4 fill-gray-200 text-gray-300" />
+        ))}
+      </div>
+    )
   }
 
   const price = 1999
@@ -419,63 +494,11 @@ export default function ProductPage() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold premium-text">Real Customer Reviews</h2>
           </div>
           <div className="space-y-6">
-            {[ 
-              {
-                name: "Himanshu",
-                text:
-                  "This is really incredible, I followed the methods for 5-6 months and gained height from 5'5 to 5'9. All I did was follow consistently.",
-              },
-              {
-                name: "Rohit",
-                text:
-                  "Using it for 3 months. I grew from 5'3 to 5'5. Just stay consistent and you will see results too.",
-              },
-              {
-                name: "Arjun",
-                text:
-                  "This really works! I was stuck at 5'4 for years, and in 4 months I reached 5'7. Just need patience and discipline.",
-              },
-              {
-                name: "Sahil",
-                text:
-                  "I didn’t believe at first, but after 3 months I can see clear results. Went from 5'6 to 5'8.",
-              },
-              {
-                name: "Ritika",
-                text:
-                  "Tried everything before, nothing worked. This actually did. From 5'2 to 5'5 in 5 months!",
-              },
-              {
-                name: "Aman",
-                text:
-                  "Bro trust me, it’s real. I started at 5'7 and now I’m 5'10 after 6 months.",
-              },
-              {
-                name: "Karan",
-                text:
-                  "I used it regularly and saw changes slowly. From 5'5 to 5'8 in around 5 months.",
-              },
-              {
-                name: "Harsh",
-                text:
-                  "At first, I thought it’s fake, but consistency made the difference. Grew 2 inches in 3 months.",
-              },
-              {
-                name: "Priya",
-                text:
-                  "Never expected it to work this well. 5'3 → 5'6 in just 4 months.",
-              },
-              {
-                name: "Tanish",
-                text:
-                  "I followed the plan daily, no excuses. From 5'6 to 5'9 now. Totally worth it!",
-              },
-            ].map((r, idx) => (
+            {reviews.map((r, idx) => (
               <div key={idx} className="p-5 md:p-6 bg-card border border-border rounded-xl">
-                <div className="flex items-center gap-2 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className={`w-4 h-4 ${i < 5 ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-300 text-gray-300'}`} />
-                  ))}
+                <div className="flex items-center justify-between mb-3">
+                  {renderStars(r.rating)}
+                  <span className="text-sm font-semibold text-foreground/80">{r.rating.toFixed(1)} / 5</span>
                 </div>
                 <p className="text-sm md:text-base text-foreground/90 leading-relaxed mb-3">{r.text}</p>
                 <div className="flex items-center gap-2 text-sm md:text-base font-semibold">
