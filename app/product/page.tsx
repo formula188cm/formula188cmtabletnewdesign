@@ -408,7 +408,7 @@ export default function ProductPage() {
               <div className="p-4 md:p-6 bg-gradient-to-br from-blue-500/5 to-blue-500/10 rounded-lg border border-blue-500/20 space-y-3">
                 <div className="flex items-center gap-2 md:gap-3">
                   <span className="text-xl md:text-2xl">👥</span>
-                  <h4 className="font-bold text-base md:text-lg">30000+ Customers</h4>
+                  <h4 className="font-bold text-base md:text-lg">30k+ Customers</h4>
                 </div>
                 <p className="text-xs md:text-sm text-muted-foreground">Trusted by thousands with 4.9/5 rating.</p>
               </div>
