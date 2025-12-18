@@ -8,8 +8,22 @@ export function generateOrderId() {
   return `ORD-${timestamp}-${random}`
 }
 
+interface CheckoutData {
+  firstName: string
+  lastName: string
+  phone: string
+  email: string
+  address: string
+  city: string
+  state: string
+  pinCode: string
+  quantity: number
+  totalPrice: number
+  paymentMethod: string
+}
+
 // Submit checkout data to Google Sheets
-export async function submitToGoogleSheets(data, orderId, sheetName = "Sheet4") {
+export async function submitToGoogleSheets(data: CheckoutData, orderId: string, sheetName: string = "Sheet4") {
   try {
     const payloadData = {
       name: `${data.firstName} ${data.lastName}`,
