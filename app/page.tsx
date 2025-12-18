@@ -309,7 +309,7 @@ export default function Home() {
               },
               {
                 icon: "👥",
-                title: "30+ Trusted Customers",
+                title: "30k Trusted Customers",
                 description:
                   "Join our satisfied customers who have experienced visible and measurable results.",
                 delay: "300ms",
